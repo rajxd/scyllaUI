@@ -4,6 +4,7 @@
   "description": "Open-source ScyllaDB web client — browse tables, run CQL, manage connections",
   "main": "server.js",
   "scripts": {
+    "test": "jest --runInBand",
     "start": "node server.js",
     "dev:server": "nodemon server.js",
     "dev:client": "cd client && npm run dev",
@@ -29,7 +30,14 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "nodemon": "^3.0.2"
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
+    "setupFiles": ["./tests/setup.js"]
   },
   "engines": {
     "node": ">=18.0.0"
