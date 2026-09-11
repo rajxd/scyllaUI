@@ -54,7 +54,7 @@ router.get('/keyspaces', async (req, res) => {
             .filter(r => !SYSTEM_KEYSPACES.has(r.keyspace_name))
             .map(r => ({
                 name: r.keyspace_name,
-                replication: r.replication ? Object.fromEntries(r.replication) : {},
+                replication: r.replication || {},
             }))
             .sort((a, b) => a.name.localeCompare(b.name));
         res.json(keyspaces);
@@ -117,7 +117,7 @@ router.get('/keyspaces/:ks/tables/:table/schema', async (req, res) => {
 
         const indexes = idxResult.rows.map(r => ({
             name: r.index_name,
-            target: r.options ? (Object.fromEntries(r.options).target || '') : '',
+            target: r.options ? (r.options.target || '') : '',
         }));
 
         const tbl = tblResult.rows[0] || {};
@@ -125,8 +125,8 @@ router.get('/keyspaces/:ks/tables/:table/schema', async (req, res) => {
             comment: tbl.comment || '',
             gcGraceSeconds: tbl.gc_grace_seconds,
             defaultTimeToLive: tbl.default_time_to_live,
-            compaction: tbl.compaction ? Object.fromEntries(tbl.compaction) : {},
-            compression: tbl.compression ? Object.fromEntries(tbl.compression) : {},
+            compaction: tbl.compaction || {},
+            compression: tbl.compression || {},
         };
 
         res.json({
