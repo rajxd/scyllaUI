@@ -3,7 +3,10 @@
 Open-source web client for **ScyllaDB** and Apache Cassandra.  
 Browse keyspaces, inspect schemas, page through data, and run CQL queries — all from a browser.
 
-**License:** Apache 2.0 &nbsp;|&nbsp; **Status:** Alpha
+[![CI](https://github.com/rajxd/scyllaUI/actions/workflows/ci.yml/badge.svg)](https://github.com/rajxd/scyllaUI/actions/workflows/ci.yml)
+[![Docker](https://github.com/rajxd/scyllaUI/actions/workflows/docker.yml/badge.svg)](https://github.com/rajxd/scyllaUI/actions/workflows/docker.yml)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rajxd/scyllaui)](https://hub.docker.com/r/rajxd/scyllaui)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
 ---
 
@@ -18,7 +21,27 @@ Browse keyspaces, inspect schemas, page through data, and run CQL queries — al
 
 ---
 
-## Quickstart — Docker (recommended)
+## Quickstart — Docker Hub (fastest)
+
+No cloning required. Pull and run directly from Docker Hub:
+
+```bash
+docker run -d \
+  --name scyllaui \
+  -p 3000:3000 \
+  -e JWT_SECRET=replace-with-a-long-random-string \
+  -e ENCRYPTION_KEY=replace-with-another-random-string \
+  -v scyllaui-data:/app/data \
+  rajxd/scyllaui
+```
+
+Open **http://localhost:3000** and create your admin account on first visit.
+
+> Your data persists in the `scyllaui-data` Docker volume across restarts and image updates.
+
+---
+
+## Quickstart — Docker Compose
 
 **1. Clone the repo**
 ```bash

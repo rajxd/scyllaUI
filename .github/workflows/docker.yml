@@ -3,6 +3,10 @@ name: Docker
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/ci.yml'
+      - 'specs/**'
   release:
     types: [published]
 
