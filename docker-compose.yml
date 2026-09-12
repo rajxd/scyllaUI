@@ -1,0 +1,16 @@
+services:
+  scyllaui:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - scyllaui-data:/app/data
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - PORT=3000
+      # - ALLOW_DDL=false
+    restart: unless-stopped
+
+volumes:
+  scyllaui-data:
